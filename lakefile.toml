@@ -1,0 +1,32 @@
+name = "e8g2-vessel"
+version = "0.1.0"
+keywords = ["math", "lie-algebra", "exceptional", "imscribing-grammar"]
+
+[leanOptions]
+pp.unicode.fun = true
+relaxedAutoImplicit = false
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.28.0"
+
+[[lean_lib]]
+name = "SynthOmnicon"
+globs = [
+  "SynthOmnicon.Primitives.Core",
+  "SynthOmnicon.Primitives.Synthon"
+]
+
+[[lean_lib]]
+name = "E8G2Vessel"
+globs = [
+  "E8G2_Vessel",
+  "E8G2_Vessel_Proofs"
+]
+
+[[lean_lib]]
+name = "MillenniumRH"
+globs = [
+  "RH"
+]
