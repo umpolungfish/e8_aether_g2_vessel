@@ -212,7 +212,7 @@ def crystal_address_distance : Nat := 302320
 
 theorem crystal_distance_computed :
     g2_crystal_address - e8_crystal_address = crystal_address_distance := by
-  native_decide
+  rfl
 
 -- ============================================================
 -- §12. Tier Structure

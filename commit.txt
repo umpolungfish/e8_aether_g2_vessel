@@ -1,0 +1,18 @@
+E8G2_Vessel.lean + E8G2_Vessel_Proofs.lean: targeted fixes from MA (2026-05-28)
+===============================================================================
+
+E8G2_Vessel.lean:
+  Fixed H_2 description: "Two-step temporal depth" → "Two-step chirality"
+  (Ħ is the Chirality primitive, not temporal depth)
+
+E8G2_Vessel_Proofs.lean:
+  crystal_distance_computed: native_decide → rfl (computable by reduction,
+  no need for native compilation)
+
+Note: files remain on SynthOmnicon.Primitives / Synthon namespace (the local
+SynthOmnicon/ bundle). Full sync to Imscribing.Primitives / Imscription would
+require restructuring the lakefile to depend on MillenniumAnkh.
+Content is otherwise equivalent to MillenniumAnkh/Millennium/E8G2_Vessel*.lean.
+
+RH.lean: no change (standalone version without Imscribing.Primitives imports;
+MA version has primitive bridge content that requires MA project structure).
