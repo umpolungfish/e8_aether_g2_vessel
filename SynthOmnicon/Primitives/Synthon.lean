@@ -114,7 +114,7 @@ def tensorProduct (a b : Synthon) : Synthon := {
   prot := if compare a.prot b.prot = .lt then b.prot else a.prot   -- max
 }
 
--- P-bottleneck: O_inf ⊗ O_2 → P_pm_sym ⊗ P_sym = P_sym (Frobenius destroyed).
+-- P-bottleneck: O_∞ ⊗ O₂ → P_pm_sym ⊗ P_sym = P_sym (Frobenius destroyed).
 theorem tensor_P_bottleneck (a b : Synthon) :
     (tensorProduct a b).pol =
       if compare a.pol b.pol = .lt then a.pol else b.pol := rfl
@@ -132,18 +132,18 @@ def synthonTier (s : Synthon) : OuroboricityTier :=
 
 -- ── P-70: Scalar K_slow template (Higgs / axion / inflaton) ──
 -- All three are spin-0 fields with double-well potential, slow-roll /
--- SSB relaxation (K_slow), symmetric potential (P_pm_sym at Phi_c).
+-- SSB relaxation (K_slow), symmetric potential (P_pm_sym at ⊙).
 -- They differ in energy scale only — not in primitive structure.
 def scalarField_Kslow : Synthon := {
   dim  := D_triangle   -- local simplicial field (no holographic substrate)
   top  := T_bowtie     -- double-well / figure-8 potential landscape
   rel  := R_dagger     -- field ↔ vacuum bidirectional (SSB is reciprocal)
-  pol  := P_pm_sym     -- exact Z_2 symmetry at Phi_c (μ ∘ δ = id)
+  pol  := P_pm_sym     -- exact Z_2 symmetry at ⊙ (μ ∘ δ = id)
   fid  := F_hbar       -- quantum coherent
   kin  := K_slow       -- slow-roll / thermally activated SSB (THE defining feature)
   gran := G_beth       -- mesoscale local description
   gram := Gamma_and    -- all SSB conditions required simultaneously
-  crit := Phi_c        -- SSB is a phase transition
+  crit := ⊙        -- SSB is a phase transition
   chir := H1           -- soft temporal asymmetry (vacuum selection)
   stoi := n_n          -- field-to-excitation: matched coupling
   prot := Omega_0      -- no topological protection of the vacuum
@@ -164,8 +164,8 @@ theorem P70_three_scale_Kslow :
     higgs = axion ∧ axion = inflaton ∧ higgs = inflaton :=
   ⟨rfl, rfl, rfl⟩
 
-/-- All three scalar K_slow fields are O_inf. -/
-theorem scalar_Kslow_is_O_inf : synthonTier scalarField_Kslow = .O_inf := by decide
+/-- All three scalar K_slow fields are O_∞. -/
+theorem scalar_Kslow_is_O_inf : synthonTier scalarField_Kslow = .O_∞ := by decide
 
 -- ── Standard Model ──────────────────────────────────────────
 def standard_model : Synthon := {
@@ -177,7 +177,7 @@ def standard_model : Synthon := {
   kin  := K_mod        -- perturbative (no confinement at this level)
   gran := G_aleph      -- all-scale: renormalization group runs to all scales
   gram := Gamma_and    -- gauge + matter + Higgs all simultaneously required
-  crit := Phi_c        -- electroweak phase transition is a critical phenomenon
+  crit := ⊙        -- electroweak phase transition is a critical phenomenon
   chir := H2           -- persistent chirality (CKM matrix, neutrino mixing)
   stoi := n_m          -- many particles, unmatched coupling strengths
   prot := Omega_Z      -- instanton winding numbers (integer)
@@ -194,14 +194,14 @@ def quantum_gravity : Synthon := {
   kin  := K_trap       -- Planck-scale dynamics are frozen at low energy
   gran := G_aleph      -- Planck-scale: all-to-all correlations
   gram := Gamma_broad  -- graviton couples universally (broadcast)
-  crit := Phi_c        -- quantum criticality at Planck scale
+  crit := ⊙        -- quantum criticality at Planck scale
   chir := H_inf        -- topological chirality (CPT asymmetry at Planck scale)
   stoi := n_m          -- many gravitational sources, unmatched
   prot := Omega_NA     -- non-Abelian topological protection
 }
 
-/-- Quantum gravity is O_inf (holographic Frobenius). -/
-theorem qg_is_O_inf : synthonTier quantum_gravity = .O_inf := by decide
+/-- Quantum gravity is O_∞ (holographic Frobenius). -/
+theorem qg_is_O_inf : synthonTier quantum_gravity = .O_∞ := by decide
 
 -- ── General Relativity ──────────────────────────────────────
 def general_relativity : Synthon := {
@@ -213,7 +213,7 @@ def general_relativity : Synthon := {
   kin  := K_slow       -- geodesic motion is slow compared to Planck scale
   gran := G_gimel      -- collective: macroscopic description
   gram := Gamma_and    -- all matter + metric conditions simultaneously
-  crit := Phi_sub      -- no quantum criticality in classical GR
+  crit := 𐑢      -- no quantum criticality in classical GR
   chir := H1           -- soft temporal asymmetry (arrow of time via initial conditions)
   stoi := n_n          -- matched: one metric for all matter
   prot := Omega_0      -- no topological protection
@@ -229,7 +229,7 @@ def yang_mills_classical : Synthon := {
   kin  := K_mod        -- perturbative regime
   gran := G_beth       -- local: Lagrangian density at each point
   gram := Gamma_and    -- gauge invariance requires all conditions
-  crit := Phi_sub      -- no mass gap yet
+  crit := 𐑢      -- no mass gap yet
   chir := H1           -- weak temporal asymmetry
   stoi := n_n          -- gauge field ↔ matter: matched
   prot := Omega_Z      -- instanton winding numbers
@@ -247,7 +247,7 @@ def yang_mills_quantum_target : Synthon := {
   kin  := K_trap       -- confinement = kinetic trapping
   gran := G_aleph      -- fine-grained: requires path integral measure
   gram := Gamma_and
-  crit := Phi_c        -- mass gap is a critical phenomenon
+  crit := ⊙        -- mass gap is a critical phenomenon
   chir := H1
   stoi := n_n
   prot := Omega_Z
@@ -266,7 +266,7 @@ theorem sm_qg_distance :
 def asymptotic_safety : Synthon := { general_relativity with
   kin  := K_mod    -- UV fixed point has moderate kinetics
   gran := G_aleph  -- Planck-scale fine-grained
-  crit := Phi_c    -- UV fixed point IS a quantum critical point
+  crit := ⊙    -- UV fixed point IS a quantum critical point
 }
 
 theorem gr_as_morphism_cost :
@@ -276,11 +276,11 @@ theorem gr_as_morphism_cost :
 -- STRUCTURAL THEOREMS
 -- ============================================================
 
-/-- Frobenius cliff: O_inf requires P_pm_sym. No other Polarity gives O_inf
+/-- Frobenius cliff: O_∞ requires P_pm_sym. No other Polarity gives O_∞
     regardless of Φ, Ω, D. (Lean-verified statement of §23 / §69.) -/
 theorem o_inf_iff_P_pm_sym_at_phi_c (s : Synthon) :
-    synthonTier s = .O_inf ↔
-    (s.crit = .Phi_c ∨ s.crit = .Phi_c_complex) ∧ s.pol = .P_pm_sym := by
+    synthonTier s = .O_∞ ↔
+    (s.crit = .⊙ ∨ s.crit = .⊙_complex) ∧ s.pol = .P_pm_sym := by
   constructor
   · intro h
     constructor
@@ -291,10 +291,10 @@ theorem o_inf_iff_P_pm_sym_at_phi_c (s : Synthon) :
     | inl h => simp [synthonTier, ouroboricityTier, h, hpol]
     | inr h => simp [synthonTier, ouroboricityTier, h, hpol]
 
-/-- Higgs is O_inf (P-70 structural claim). -/
-theorem higgs_is_O_inf : synthonTier higgs = .O_inf := by decide
+/-- Higgs is O_∞ (P-70 structural claim). -/
+theorem higgs_is_O_inf : synthonTier higgs = .O_∞ := by decide
 
-/-- Tensor of O_inf with any O_2 system (P_sym) gives P_sym — Frobenius destroyed. -/
+/-- Tensor of O_∞ with any O₂ system (P_sym) gives P_sym — Frobenius destroyed. -/
 theorem tensor_O_inf_O2_destroys_frobenius (s_inf s_two : Synthon)
     (h_inf : s_inf.pol = .P_pm_sym) (h_two : s_two.pol = .P_sym) :
     (tensorProduct s_inf s_two).pol = .P_sym := by

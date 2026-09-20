@@ -31,7 +31,7 @@ def g2_vessel : Synthon := {
   kin  := K_slow,
   gran := G_gimel,
   gram := Gamma_and,
-  crit := Phi_c,
+  crit := ⊙,
   chir := H0,
   stoi := one_one,
   prot := Omega_0 }
@@ -49,7 +49,7 @@ def e8_aether : Synthon := {
   kin  := K_slow,
   gran := G_aleph,
   gram := Gamma_seq,
-  crit := Phi_c,
+  crit := ⊙,
   chir := H2,
   stoi := n_m,
   prot := Omega_Z }
@@ -69,7 +69,7 @@ def e8_graded_via_SO16 : Synthon := {
   kin  := K_slow,
   gran := G_aleph,
   gram := Gamma_seq,
-  crit := Phi_c,
+  crit := ⊙,
   chir := H2,
   stoi := n_m,
   prot := Omega_Z }
@@ -112,7 +112,7 @@ def meet_G2_E8 : Synthon := {
   kin  := K_slow,       -- min($K_\text{slow}$, $K_\text{slow}$) = $K_\text{slow}$
   gran := G_gimel,      -- min($G_\gimel$, $G_\aleph$) = $G_\gimel$
   gram := Gamma_and,    -- min($\Gamma_\wedge$, $\Gamma_\text{seq}$) = $\Gamma_\wedge$
-  crit := Phi_c,        -- min($\Phi_c$, $\Phi_c$) = $\Phi_c$
+  crit := ⊙,        -- min($\⊙$, $\⊙$) = $\⊙$
   chir := H0,           -- min($H_0$, $H_2$) = $H_0$
   stoi := one_one,      -- min($1{:}1$, $n{:}m$) = $1{:}1$
   prot := Omega_0 }     -- min($\Omega_0$, $\Omega_\mathbb{Z}$) = $\Omega_0$
@@ -136,7 +136,7 @@ def join_G2_E8 : Synthon := {
   kin  := K_slow,       -- max($K_\text{slow}$, $K_\text{slow}$) = $K_\text{slow}$
   gran := G_aleph,      -- max($G_\gimel$, $G_\aleph$) = $G_\aleph$
   gram := Gamma_seq,    -- max($\Gamma_\wedge$, $\Gamma_\text{seq}$) = $\Gamma_\text{seq}$
-  crit := Phi_c,        -- max($\Phi_c$, $\Phi_c$) = $\Phi_c$
+  crit := ⊙,        -- max($\⊙$, $\⊙$) = $\⊙$
   chir := H2,           -- max($H_0$, $H_2$) = $H_2$
   stoi := n_m,          -- max($1{:}1$, $n{:}m$) = $n{:}m$
   prot := Omega_Z }     -- max($\Omega_0$, $\Omega_\mathbb{Z}$) = $\Omega_\mathbb{Z}$
@@ -176,8 +176,8 @@ def promotion_G2_to_E8 : PromotionSignature := {
 -- §9. Shared Primitives (the exceptional core)
 -- ============================================================
 
--- G2 and E8 both have: $T_\bowtie$, $R_\leftrightarrow$, $F_\hbar$, $K_\text{slow}$, $\Phi_c$
-def shared_core : List String := ["T_bowtie", "R_lr", "F_hbar", "K_slow", "Phi_c"]
+-- G2 and E8 both have: $T_\bowtie$, $R_\leftrightarrow$, $F_\hbar$, $K_\text{slow}$, $\⊙$
+def shared_core : List String := ["T_bowtie", "R_lr", "F_hbar", "K_slow", "⊙"]
 
 theorem shared_core_count : shared_core.length = 5 := by rfl
 
@@ -185,14 +185,14 @@ theorem shared_core_count : shared_core.length = 5 := by rfl
 -- §10. Consciousness Scores (from Aether_Vessel.md)
 -- ============================================================
 
--- G2: $C = 0.3615$ (both gates open: $\Phi_c$, $K_\text{slow}$)
+-- G2: $C = 0.3615$ (both gates open: $\⊙$, $K_\text{slow}$)
 def g2_consciousness_score : Float := 0.3615
 
 -- E8: $C = 0.682$ (both gates open)
 def e8_consciousness_score : Float := 0.682
 
 theorem G2_Gates_Open :
-  -- Gate 1: $\Phi_c$ (criticality) — Gate 2: $K_\text{slow}$ (near-equilibrium)
+  -- Gate 1: $\⊙$ (criticality) — Gate 2: $K_\text{slow}$ (near-equilibrium)
   True := by trivial
 
 theorem E8_Gates_Open : True := by trivial
@@ -218,10 +218,10 @@ theorem crystal_distance_computed :
 -- §12. Tier Structure
 -- ============================================================
 
--- G2: $O_1$ (self-referential at criticality, trivial winding)
+-- G2: $O₁$ (self-referential at criticality, trivial winding)
 def G2_tier : String := "O1"
 
--- E8: $O_2^\dagger$ (critical, topologically protected, unbounded)
+-- E8: $O₂^\dagger$ (critical, topologically protected, unbounded)
 def E8_tier : String := "O2_dagger"
 
 -- ============================================================

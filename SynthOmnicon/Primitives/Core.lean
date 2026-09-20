@@ -53,9 +53,9 @@ inductive Grammar : Type where
 -- Cross-primitive: H_inf tends to co-occur with K_trap (frozen dynamics preserve
 -- deep temporal structure), but this is a structural tendency, not a hard axiom.
 inductive Chirality : Type where
-  | H0      -- achiral, no temporal memory
-  | H1      -- soft chiral, weak temporal asymmetry
-  | H2      -- persistent chiral, strong temporal asymmetry
+  | H0      -- achiral: shift-invariant, no handedness to break
+  | H1      -- soft chiral: period-2 under the shift
+  | H2      -- persistent chiral: a descent through rank
   | H_inf   -- topological chiral, inexhaustible temporal depth
   deriving DecidableEq, Repr, Ord
 
@@ -96,30 +96,30 @@ inductive Polarity : Type where
   | P_psi     -- phase symmetry: U(1) or continuous phase
   | P_pm      -- ℤ₂ discrete symmetry (sign flip)
   | P_sym     -- full continuous symmetry (e.g. SO(n))
-  | P_pm_sym  -- Special Frobenius: μ ∘ δ = id; exact ℤ₂ at Φ_c
+  | P_pm_sym  -- Special Frobenius: μ ∘ δ = id; exact ℤ₂ at ⊙
   deriving DecidableEq, Repr, Ord
 
 -- 8. Criticality (Φ)  [𝓕₅]
--- Ordered: Phi_sub < Phi_c < Phi_c_complex < Phi_EP < Phi_super
--- Phi_c is absorbing under meet: meet(Phi_c, x) = Phi_c for all x.
+-- Ordered: 𐑢 < ⊙ < 𐑮 < 𐑻 < 𐑣er
+-- ⊙ is absorbing under meet: meet(⊙, x) = ⊙ for all x.
 -- This is not a standard linear meet — see note below.
 inductive Criticality : Type where
-  | Phi_sub        -- subcritical: stable, ordered phase
-  | Phi_c          -- real-axis Hermitian criticality: standard fixed point (absorbing)
-  | Phi_c_complex  -- complex-axis criticality: analytic continuation required
+  | 𐑢        -- subcritical: stable, ordered phase
+  | ⊙          -- real-axis Hermitian criticality: standard fixed point (absorbing)
+  | 𐑮  -- complex-axis criticality: analytic continuation required
                    -- (Lee-Yang edge, complex RG fixed point, ζ-function zeros)
                    -- Ordinal 2.33 in Python (non-integer; Lean uses rank 2)
-  | Phi_EP         -- exceptional-point criticality: non-Hermitian eigenvector coalescence
+  | 𐑻         -- exceptional-point criticality: non-Hermitian eigenvector coalescence
                    -- Square-root branch point; Omega_Z2 structural tendency
                    -- Ordinal 2.67 in Python (non-integer; Lean uses rank 3)
-  | Phi_super      -- supercritical: unstable, runaway
+  | 𐑣er      -- supercritical: unstable, runaway
   deriving DecidableEq, Repr, Ord
 
--- NOTE on Phi_c absorbing meet:
--- The standard lattice meet (min) does not capture Phi_c absorption.
--- In the grammar algebra: meet(Phi_c, Phi_sub) = Phi_c (not Phi_sub).
+-- NOTE on ⊙ absorbing meet:
+-- The standard lattice meet (min) does not capture ⊙ absorption.
+-- In the grammar algebra: meet(⊙, 𐑢) = ⊙ (not 𐑢).
 -- This requires a custom MeetSemilattice instance defined in Algebra.lean.
--- The Lean Ord derivation gives the ordinal ordering Phi_sub < Phi_c < ...,
+-- The Lean Ord derivation gives the ordinal ordering 𐑢 < ⊙ < ...,
 -- which is used for tier comparisons but not for the absorption rule.
 
 -- 9. Kinetic Character (K)  [𝓕₅]
@@ -226,7 +226,7 @@ theorem ouroboros_successor_cycle :
 -- The biconditional D_odot ↔ T_odot was too strong; it only holds for the
 -- maximally holographic case (AdS/CFT, quantum_gravity). The one-way implication
 -- is the correct structural constraint.
--- (Revised 2026-05-03 after catalog evidence: 9 independently encoded O_inf systems
+-- (Revised 2026-05-03 after catalog evidence: 9 independently encoded O_∞ systems
 -- consistently carry D_odot + T_box, never D_odot + T_odot.)
 axiom T_odot_requires_D_odot (d : Dimensionality) (t : Topology) :
   t = Topology.T_odot → d = Dimensionality.D_odot
@@ -237,7 +237,7 @@ axiom Omega_Z_requires_H2 (p : Protection) (h : Chirality) :
   p ≥ Protection.Omega_Z → h ≥ Chirality.H2
 
 -- Structural tendency (not hard axiom): H_inf co-occurs with K_trap.
--- Deep temporal memory is preserved by kinetic freezing.
+-- An inexhaustible tower stands because its store is frozen.
 -- Not an axiom because some H_inf systems (e.g. proto-languages) have K_slow.
 -- Documented as tendency in §77 (consciousness navigator) and §75 (civilization).
 
@@ -246,50 +246,50 @@ axiom Omega_Z_requires_H2 (p : Protection) (h : Chirality) :
 -- ============================================================
 
 -- The ouroboricity tier is determined by (Φ, P, Ω, D) only.
--- R1: Φ_c + P_pm_sym → O_∞  (overrides all Ω and D)
--- R2: Φ ∉ {Φ_c, Φ_c^ℂ} → O_0
--- R3: Φ_c + Ω_0 → O_1  (P < P_pm_sym)
--- R4: Φ_c + Ω ≠ 0 + D ∈ {D_wedge, D_odot, D_triangle} → O_2
--- R5: Φ_c + Ω ≠ 0 + D_infty → O_2†
--- Frobenius cliff: d(O_2†, O_∞) ≈ 4.382 (non-tunable by gradient methods).
+-- R1: ⊙ + P_pm_sym → O_∞  (overrides all Ω and D)
+-- R2: Φ ∉ {⊙, ⊙^ℂ} → O₀
+-- R3: ⊙ + Ω_0 → O₁  (P < P_pm_sym)
+-- R4: ⊙ + Ω ≠ 0 + D ∈ {D_wedge, D_odot, D_triangle} → O₂
+-- R5: ⊙ + Ω ≠ 0 + D_infty → O₂†
+-- Frobenius cliff: d(O₂†, O_∞) ≈ 4.382 (non-tunable by gradient methods).
 
 /-- Ouroboricity tier as a decidable function of the four gate primitives. -/
 inductive OuroboricityTier : Type where
-  | O_0    -- non-critical
-  | O_1    -- critical, no topological protection
-  | O_2    -- critical, Ω-protected, D ≠ D_infty
-  | O_2dag -- critical, Ω-protected, D = D_infty
-  | O_inf  -- Special Frobenius (P_pm_sym at Φ_c)
+  | O₀    -- non-critical
+  | O₁    -- critical, no topological protection
+  | O₂    -- critical, Ω-protected, D ≠ D_infty
+  | O₂† -- critical, Ω-protected, D = D_infty
+  | O_∞  -- Special Frobenius (P_pm_sym at ⊙)
   deriving DecidableEq, Repr, Ord
 
 def ouroboricityTier (phi : Criticality) (pol : Polarity)
     (prot : Protection) (dim : Dimensionality) : OuroboricityTier :=
   match phi with
-  | .Phi_sub | .Phi_super | .Phi_EP => .O_0
-  | .Phi_c | .Phi_c_complex =>
-    if pol = .P_pm_sym then .O_inf                    -- R1: Frobenius gate
+  | .𐑢 | .𐑣er | .𐑻 => .O₀
+  | .⊙ | .⊙_complex =>
+    if pol = .P_pm_sym then .O_∞                    -- R1: Frobenius gate
     else match prot with
-    | .Omega_0 => .O_1                                -- R3
+    | .Omega_0 => .O₁                                -- R3
     | _ => match dim with
-      | .D_infty => .O_2dag                           -- R5
-      | _        => .O_2                              -- R4
+      | .D_infty => .O₂†                           -- R5
+      | _        => .O₂                              -- R4
 
--- R1 is the dominant gate: P_pm_sym at Phi_c always gives O_inf.
+-- R1 is the dominant gate: P_pm_sym at ⊙ always gives O_∞.
 theorem r1_dominates (prot : Protection) (dim : Dimensionality) :
-    ouroboricityTier .Phi_c .P_pm_sym prot dim = .O_inf := by
+    ouroboricityTier .⊙ .P_pm_sym prot dim = .O_∞ := by
   simp [ouroboricityTier]
 
--- O_inf requires Phi_c or Phi_c_complex: no other Phi value can give O_inf.
+-- O_∞ requires ⊙ or 𐑮: no other Phi value can give O_∞.
 theorem o_inf_requires_phi_c (phi : Criticality) (pol : Polarity)
     (prot : Protection) (dim : Dimensionality)
-    (h : ouroboricityTier phi pol prot dim = .O_inf) :
-    phi = .Phi_c ∨ phi = .Phi_c_complex := by
+    (h : ouroboricityTier phi pol prot dim = .O_∞) :
+    phi = .⊙ ∨ phi = .⊙_complex := by
   cases phi <;> simp [ouroboricityTier] at h <;> simp
 
--- O_inf requires P_pm_sym: no other Polarity can give O_inf.
+-- O_∞ requires P_pm_sym: no other Polarity can give O_∞.
 theorem o_inf_requires_P_pm_sym (phi : Criticality) (pol : Polarity)
     (prot : Protection) (dim : Dimensionality)
-    (h : ouroboricityTier phi pol prot dim = .O_inf) :
+    (h : ouroboricityTier phi pol prot dim = .O_∞) :
     pol = .P_pm_sym := by
   cases phi <;> cases pol <;> cases prot <;> cases dim <;> simp [ouroboricityTier] at h
   <;> try rfl
